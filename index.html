@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>untitled</title>
+	<meta name="author" content="Alex Dorey">
+	<link rel="stylesheet" href="simple.css" type="text/css" media="all" title="simple" charset="utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="comparison-table.js" type="text/javascript" charset="utf-8"></script>
+	
+<!--    Originally from here:
+	    http://blog.codekills.net/archives/89-Equality-in-JavaScript.html
+		
+		Converted from this gist:
+		https://gist.github.com/761080
+	-->
+</head>
+<body>
+	<div id="tabs">
+		<ul>
+			<li>
+				<a href="#two-equals">
+					==
+				</a>
+			</li>
+			<li>
+				<a href="#three-equals">
+					===
+				</a>
+			</li>
+			<li>
+				<a href="#if-statement">
+					If()
+				</a>
+			</li>
+		</ul>
+		<div id="two-equals">
+			<h2>== <smaller>(negated: !=)</smaller></h2>
+			<p class="description">
+				When using two equals signs for JavaScript equality testing, some funky conversions take place.
+			</p>
+		</div>
+		<div id="three-equals">
+			<h2>=== <smaller>(negated: !==)</smaller></h2>
+			<p class="description">
+				When using three equals signs for JavaScript equality testing, some funky conversions take place.
+			</p>
+		</div>
+		<div id="if-statement">
+			<h2>A standard IF statement. If(<i>value</i>) {/*- green -*/} else { /*- red -*/ }</h2>
+			<p>Note: This row does not match up with any of the rows in the other table.</p>
+		</div>
+		<div style="padding: 2px 20px">
+			<h4>Moral of the story:</h4>
+			<p>Use three equals unless you fully understand the conversions that take place for two-equals.</p>
+		</div>
+	</div>
+<script type="text/javascript" charset="utf-8">
+	$("#two-equals").append(EqualityTable("=="))
+	$("#three-equals").append(EqualityTable("==="))
+	$("#if-statement").append(EqualityTable("if-statement"))
+	$('#tabs').tabs();
+</script>
+</body>
+</html>
