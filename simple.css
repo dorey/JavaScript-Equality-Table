@@ -1,12 +1,24 @@
+table.comparisons {
+    border-spacing: 0;
+}
 table.comparisons td.cell {
-	width: 25px;
-	height: 25px;
+    padding: 1.5px;
 }
-table.comparisons td.cell.green {
-	background-color: green;
+table.comparisons td.cell div {
+    width: 25px;
+    height: 25px;
+    border: 2px solid black;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
 }
-table.comparisons td.cell.red {
-	background-color: red;
+table.comparisons td.cell.green div {
+	background-color: #5bbe5b;
+	border-color: #0b6c0b;
+}
+table.comparisons td.cell.red div {
+	background-color: #ed9e98;
+	border-color: #be120d;
 }
 table.comparisons td.header.col {
 	height: 100px;

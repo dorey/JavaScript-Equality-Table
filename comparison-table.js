@@ -33,26 +33,45 @@ var EqualityTable = (function(cmpStr){
       if(cmpStr=="if-statement") {
           _curRow = $("<tr />");
           _curRow.append($("<td />", {'class':'row header'}).html("If (<i>value</i>)"))
+          var elem;
           $.each(comparisons, function(i){
+              elem = $("<td />", {'class':'cell green'}).html("<div />")
               if(comparisons[i]) {
-                  _curRow.append($("<td />", {'class':'cell green'}))
+                  elem.addClass('green');
+                  elem.attr('title', "if("+comparisons[i]+"){/*--executes--*/}")
               } else {
-                  _curRow.append($("<td />", {'class':'cell red'}))
+                  elem.addClass('red');
+                  elem.attr('title', "if("+comparisons[i]+"){/*--does not execute--*/}")
               }
+              _curRow.append(elem)
           })
           _tableHtml.append(_curRow);
       } else {
+          var elem;
           for (i = 0; i < comparisons.length; i += 1) {
     		_curRow = $("<tr />");
     		_curRow.append($("<td />", {'class':'row header'}).html(representations[i]))
 
     		for (j = 0; j < comparisons.length; j += 1) {
+    		    elem = $("<td />", {'class': 'cell'}).html("<div />");
     			if(cmpStr==="===") {
-    				result = comparisons[i] === comparisons[j];
+    			    if(comparisons[i]===comparisons[j]) {
+    			        elem.addClass('green');
+                        elem.attr('title', ""+representations[i]+"==="+representations[j]+"  » true ")
+    			    } else {
+    			        elem.addClass('red');
+                        elem.attr('title', ""+representations[i]+"==="+representations[j]+"  » false ")
+    			    }
     			} else if(cmpStr==="=="){
-    				result = comparisons[i] == comparisons[j];
+    			    if(comparisons[i]==comparisons[j]) {
+    			        elem.addClass('green');
+                        elem.attr('title', ""+representations[i]+"=="+representations[j]+"  » true ")
+    			    } else {
+    			        elem.addClass('red');
+                        elem.attr('title', ""+representations[i]+"=="+representations[j]+"  » false ")
+    			    }
     			}
-    			_curRow.append($("<td />", {'class': ['cell', result ? 'green' : 'red'].join(' ')}));
+    			_curRow.append(elem);
     	    }
     		_tableHtml.append(_curRow);
     	  }
