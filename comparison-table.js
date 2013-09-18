@@ -1,6 +1,6 @@
 
 var EqualityTable = (function(cmpStr){
-	var comparisons = [true, false, 1, 0, -1, "1", "0", "-1", "", null,
+	var comparisons = [true, false, 1, 0, -1, "true", "false", "1", "0", "-1", "", null,
 	              undefined, [], {}, [[]], [0], [1], parseFloat("nan")];
 
 	function map(f, x) {
