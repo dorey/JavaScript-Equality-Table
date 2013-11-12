@@ -92,12 +92,17 @@ do ->
   testEquality(`[[]]==[[]]`, "`[[]]`", "==")
   testEquality(`[]==[]`, "`[]`", "==")
 
+supportsCanvas = do ->
+  el = document.createElement "canvas"
+  !!(el.getContext && el.getContext("2d"))
+
 @buildComparisonTable = (values, comparator)->
   comps = (new ForComparison(v) for v in values)
   $table = $("<table>", class: "comparisons")
   $headRow = $("<tr>").append("<td>").appendTo($table)
   for comp in comps
-    $("<td>", class: "header col").html($("<span>", text: comp.asString)).appendTo($headRow)
+    $el = if supportsCanvas then rotateText(comp.asString) else $("<span>", class: "rotate", text: comp.asString)
+    $("<td>", class: "header col").html($el).appendTo($headRow)
   for valX, x in comps
     $tr = $("<tr>").appendTo($table)
     $("<td>", class: "row header").text(valX.asString).appendTo($tr)
@@ -113,12 +118,22 @@ do ->
   comps = (new ForComparison(v) for v in values)
   $table = $("<table>", class: "comparisons")
   for comp in comps
-    $tr = $("<tr>").html($("<td>", text: comp.asString)).appendTo($table)
+    $tr = $("<tr>").html($("<td>", class: "header row", text: comp.asString)).appendTo($table)
     $td = $("<td>", class: "cell").html($("<div>", html: "&nbsp;")).appendTo($tr)
     val = (new Function("if(#{comp.asString}){return true}else{return false}"))()
     if val
       $td.addClass("green")
     expression = " if (#{comp.asString}) { /* #{if val then 'executes' else 'does not execute'} */ } "
     $("<td>", class: "expression").html(expression).appendTo($tr)
+  $table
 
-  $table  
+rotateText = (txt, cHeight=80)->
+  canv = document.createElement("canvas")
+  canv.width = "25"
+  canv.height = cHeight
+  c = canv.getContext("2d")
+  c.rotate(Math.PI / 2)
+  c.font = "15px Monospace"
+  c.textAlign = "right"
+  c.fillText(txt,cHeight,-10)
+  canv

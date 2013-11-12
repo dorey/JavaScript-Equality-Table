@@ -1,6 +1,13 @@
 table.comparisons {
     border-spacing: 0;
 }
+table.comparisons td.row.header {
+  text-align: right;
+  font-family: Monospace;
+  font-size: 15px;
+  font-weight: 600;
+  padding-right: 14px;
+}
 table.comparisons td.cell {
     padding: 1.5px;
 }
@@ -19,15 +26,18 @@ table.comparisons td.cell.green div {
   border-color: #0b6c0b;
 }
 table.comparisons td.header.col {
-	height: 100px;
+	height: 90px;
 }
-table.comparisons td.header.col span {
-	position: absolute;
-	-moz-transform:rotate(90deg);
-  	-webkit-transform:rotate(90deg);
-  	-o-transform:rotate(90deg);
-  	-ms-transform:rotate(90deg);
-  	transform:rotate(90deg);
+table.comparisons td.header.col span.rotate {
+  position: absolute;
+  font-family: Monospace;
+  font-size: 15px;
+  font-weight: 600;
+  -moz-transform:rotate(90deg);
+  -webkit-transform:rotate(90deg);
+  -o-transform:rotate(90deg);
+  -ms-transform:rotate(90deg);
+  transform:rotate(90deg);
 }
 table.comparisons .expression {
   font-size: 13px;
