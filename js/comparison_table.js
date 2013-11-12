@@ -176,8 +176,8 @@
     return $table;
   };
 
-  this.buildComparisonTableForIf = function(values) {
-    var $table, $td, $tr, comp, comps, expression, v, val, _i, _len;
+  this.buildUnifiedComparisonTable = function(values) {
+    var $el, $headRow, $table, $tr, comps, evalStr2, evalStr3, exprClass, r2, r3, status, td, txt, v, valX, valY, x, y, _i, _j, _len, _len1, _ref, _ref1;
     comps = (function() {
       var _i, _len, _results;
       _results = [];
@@ -190,25 +190,81 @@
     $table = $("<table>", {
       "class": "comparisons"
     });
-    for (_i = 0, _len = comps.length; _i < _len; _i++) {
-      comp = comps[_i];
-      $tr = $("<tr>").html($("<td>", {
-        "class": "header row",
-        text: comp.asString
-      })).appendTo($table);
-      $td = $("<td>", {
-        "class": "cell"
-      }).html($("<div>", {
-        html: "&nbsp;"
-      })).appendTo($tr);
-      val = (new Function("if(" + comp.asString + "){return true}else{return false}"))();
-      if (val) {
-        $td.addClass("green");
-      }
-      expression = " if (" + comp.asString + ") { /* " + (val ? 'executes' : 'does not execute') + " */ } ";
+    $headRow = $("<tr>").append("<td>").appendTo($table);
+    for (x = _i = 0, _len = comps.length; _i < _len; x = ++_i) {
+      valX = comps[x];
+      $el = supportsCanvas ? rotateText(valX.asString) : $("<span>", {
+        "class": "rotate",
+        text: valX.asString
+      });
       $("<td>", {
-        "class": "expression"
-      }).html(expression).appendTo($tr);
+        "class": "header col"
+      }).html($el).appendTo($headRow);
+      $tr = $("<tr>").appendTo($table);
+      exprClass = (function() {
+        var val;
+        val = (new Function("if(" + valX.asString + "){return true}else{return false}"))();
+        if (val) {
+          return "true";
+        } else {
+          return "false";
+        }
+      })();
+      $("<td>", {
+        "class": "row header " + exprClass
+      }).text(valX.asString).append("<span>:</span>").appendTo($tr);
+      for (y = _j = 0, _len1 = comps.length; _j < _len1; y = ++_j) {
+        valY = comps[y];
+        _ref = valX.testResults(valY, "=="), evalStr2 = _ref[0], r2 = _ref[1];
+        _ref1 = valX.testResults(valY, "==="), evalStr3 = _ref1[0], r3 = _ref1[1];
+        if (r2 && r3) {
+          status = "strict-equality";
+          txt = "=";
+        } else if (r2) {
+          status = "loose-equality";
+          txt = "&#8773;";
+        } else {
+          status = "no-equality";
+          txt = "&#8800;";
+        }
+        td = $("<td>", {
+          "class": "cell",
+          html: "<div>" + txt + "</div>"
+        }).appendTo($tr);
+        td.data("eval2", evalStr2);
+        td.data("eval3", evalStr3);
+        if (r2 && r3) {
+          td.addClass("strict-equality");
+        } else if (r2) {
+          td.addClass("loose-equality");
+        }
+      }
+    }
+    return $table;
+  };
+
+  this.buildKeyTable = function() {
+    var $table, rowc, rowdesc, rowicon, rows, rowtxt, td, tr, _i, _len, _ref;
+    $table = $("<table>", {
+      "class": "key comparisons"
+    });
+    rows = [["no-eq", "&#8800;", "Not equal"], ["loose-equality", "&#8773;", "Loose equality", "Often gives \"false\" positives like \"1\" is true; [] is \"0\""], ["strict-equality", "=", "Strict equality", "Mostly evaluates as one would expect."]];
+    for (_i = 0, _len = rows.length; _i < _len; _i++) {
+      _ref = rows[_i], rowc = _ref[0], rowicon = _ref[1], rowtxt = _ref[2], rowdesc = _ref[3];
+      tr = $("<tr>").appendTo($table);
+      $("<td>", {
+        "class": "" + rowc + " cell"
+      }).html("<div>" + rowicon + "</div>").appendTo(tr);
+      td = $("<td>", {
+        "class": "" + rowc + " label"
+      }).html(rowtxt);
+      if (rowdesc) {
+        $("<p>", {
+          "class": "desc",
+          html: rowdesc
+        }).appendTo(td);
+      }
+      td.appendTo(tr);
     }
     return $table;
   };

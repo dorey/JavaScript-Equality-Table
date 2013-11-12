@@ -114,19 +114,59 @@ supportsCanvas = do ->
         td.addClass("green")
   $table
 
-@buildComparisonTableForIf = (values)->
+@buildUnifiedComparisonTable = (values)->
   comps = (new ForComparison(v) for v in values)
   $table = $("<table>", class: "comparisons")
-  for comp in comps
-    $tr = $("<tr>").html($("<td>", class: "header row", text: comp.asString)).appendTo($table)
-    $td = $("<td>", class: "cell").html($("<div>", html: "&nbsp;")).appendTo($tr)
-    val = (new Function("if(#{comp.asString}){return true}else{return false}"))()
-    if val
-      $td.addClass("green")
-    expression = " if (#{comp.asString}) { /* #{if val then 'executes' else 'does not execute'} */ } "
-    $("<td>", class: "expression").html(expression).appendTo($tr)
+  $headRow = $("<tr>").append("<td>").appendTo($table)
+  for valX, x in comps
+    $el = if supportsCanvas then rotateText(valX.asString) else $("<span>", class: "rotate", text: valX.asString)
+    $("<td>", class: "header col").html($el).appendTo($headRow)
+
+    $tr = $("<tr>").appendTo($table)
+    exprClass = do ->
+      val = (new Function("if(#{valX.asString}){return true}else{return false}"))()
+      if val then "true" else "false"
+    $("<td>", class: "row header #{exprClass}").text(valX.asString).append("<span>:</span>").appendTo($tr)
+    for valY, y in comps
+      [evalStr2, r2] = valX.testResults(valY, "==")
+      [evalStr3, r3] = valX.testResults(valY, "===")
+      if r2 and r3
+        status = "strict-equality"
+        txt = "="
+      else if r2
+        status = "loose-equality"
+        txt = "&#8773;"
+      else
+        status = "no-equality"
+        txt = "&#8800;"
+      td = $("<td>", class: "cell", html: "<div>#{txt}</div>").appendTo($tr)
+      td.data("eval2", evalStr2)
+      td.data("eval3", evalStr3)
+      if r2 and r3
+        td.addClass("strict-equality")
+      else if r2
+        td.addClass("loose-equality")
+
   $table
 
+@buildKeyTable = ->
+  $table = $("<table>", class: "key comparisons")
+  rows = [
+    ["no-eq", "&#8800;", "Not equal"],
+    ["loose-equality", "&#8773;", "Loose equality", """
+      Often gives "false" positives like "1" is true; [] is "0"
+      """]
+    ["strict-equality", "=", "Strict equality", """
+      Mostly evaluates as one would expect.
+    """]
+  ]
+  for [rowc, rowicon, rowtxt, rowdesc] in rows
+    tr = $("<tr>").appendTo $table
+    $("<td>", class: "#{rowc} cell").html("<div>#{rowicon}</div>").appendTo(tr)
+    td = $("<td>", class: "#{rowc} label").html(rowtxt)
+    $("<p>", class: "desc", html: rowdesc).appendTo(td)  if rowdesc
+    td.appendTo(tr)
+  $table
 rotateText = (txt, cHeight=80)->
   canv = document.createElement("canvas")
   canv.width = "25"

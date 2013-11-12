@@ -10,68 +10,28 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript" src="js/comparison_table.js"></script>
 	
-<!--    Originally from here:
+<!--    Inspired by this post:
 	    http://blog.codekills.net/archives/89-Equality-in-JavaScript.html
 
 	    2013-Nov-11. Correcting issue where "[]===[]" was incorrectly marked as true.
-
-		Converted from this gist:
-		https://gist.github.com/761080
-	-->
+-->
 </head>
 <body>
-
-	<div id="tabs">
-		<ul>
-			<li>
-				<a href="#two-equals">
-					==
-				</a>
-			</li>
-			<li>
-				<a href="#three-equals">
-					===
-				</a>
-			</li>
-			<li>
-				<a href="#if-statement">
-					If()
-				</a>
-			</li>
-		</ul>
-		<div id="two-equals">
-			<h2>== <smaller>(negated: !=)</smaller></h2>
-			<p class="description">
-				When using two equals signs for JavaScript equality testing, some funky conversions take place.
-			</p>
-		</div>
-		<div id="three-equals">
-			<h2>=== <smaller>(negated: !==)</smaller></h2>
-			<p class="description">
-				When using three equals signs for JavaScript equality testing, everything is <b>as is</b>. Nothing gets converted before being evaluated.
-			</p>
-		</div>
-		<div id="if-statement">
-			<h2>A standard IF statement. If(<i>value</i>) {/*- green -*/} else { /*- red -*/ }</h2>
-			<p>Note: This row does not match up with any of the rows in the other table.</p>
-		</div>
-		<div style="padding: 2px 20px">
-			<h4>Moral of the story:</h4>
-			<p>Use three equals unless you fully understand the conversions that take place for two-equals.</p>
-		</div>
+	<div id="content">
+		<h3>Equality in JavaScript</h3>
+		<div id="table"></div>
+		<div id="key"></div>
+		<br style="clear:both">
 	</div>
-<script type="text/javascript" charset="utf-8">
-	/*
-	Strings in backticks (`) are evaluated.
-	*/
-	var values = [true, false, 1, 0, -1, "`'true'`", "`'false'`", "`'1'`", "`'0'`", "`'-1'`",
-		"", "`null`", "`undefined`", "`[]`", "`{}`", [[]], [0], [1], "`parseFloat('nan')`"];
+	<script type="text/javascript" charset="utf-8">
+		/*
+		Strings in backticks (`) are evaluated.
+		*/
+		var values = [true, false, 1, 0, -1, "`'true'`", "`'false'`", "`'1'`", "`'0'`", "`'-1'`",
+			"", "`null`", "`undefined`", "`[]`", "`{}`", [[]], [0], [1], "`parseFloat('nan')`"];
 
-	buildComparisonTable(values, "==").appendTo("#two-equals")
-	buildComparisonTable(values, "===").appendTo("#three-equals")
-	buildComparisonTableForIf(values).appendTo("#if-statement")
-
-	$('#tabs').tabs();
-</script>
+		buildUnifiedComparisonTable(values).appendTo("#table")
+		buildKeyTable().appendTo("#key")
+	</script>
 </body>
 </html>
