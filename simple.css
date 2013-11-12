@@ -11,14 +11,12 @@ table.comparisons td.cell div {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
+  	background-color: #ed9e98;
+  	border-color: #be120d;
 }
 table.comparisons td.cell.green div {
-	background-color: #5bbe5b;
-	border-color: #0b6c0b;
-}
-table.comparisons td.cell.red div {
-	background-color: #ed9e98;
-	border-color: #be120d;
+  background-color: #5bbe5b;
+  border-color: #0b6c0b;
 }
 table.comparisons td.header.col {
 	height: 100px;
@@ -30,6 +28,11 @@ table.comparisons td.header.col span {
   	-o-transform:rotate(90deg);
   	-ms-transform:rotate(90deg);
   	transform:rotate(90deg);
+}
+table.comparisons .expression {
+  font-size: 13px;
+  color: #666;
+  padding-left: 8px;
 }
 /*
  * jQuery UI CSS Framework 1.8.9

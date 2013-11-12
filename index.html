@@ -8,11 +8,13 @@
 	<link rel="stylesheet" href="simple.css" type="text/css" media="all" title="simple" charset="utf-8">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="comparison-table.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="js/comparison_table.js"></script>
 	
 <!--    Originally from here:
 	    http://blog.codekills.net/archives/89-Equality-in-JavaScript.html
-		
+
+	    2013-Nov-11. Correcting issue where "[]===[]" was incorrectly marked as true.
+
 		Converted from this gist:
 		https://gist.github.com/761080
 	-->
@@ -59,9 +61,16 @@
 		</div>
 	</div>
 <script type="text/javascript" charset="utf-8">
-	$("#two-equals").append(EqualityTable("=="))
-	$("#three-equals").append(EqualityTable("==="))
-	$("#if-statement").append(EqualityTable("if-statement"))
+	/*
+	Strings in backticks (`) are evaluated.
+	*/
+	var values = [true, false, 1, 0, -1, "`'true'`", "`'false'`", "`'1'`", "`'0'`", "`'-1'`",
+		"", "`null`", "`undefined`", "`[]`", "`{}`", [[]], [0], [1], "`parseFloat('nan')`"];
+
+	buildComparisonTable(values, "==").appendTo("#two-equals")
+	buildComparisonTable(values, "===").appendTo("#three-equals")
+	buildComparisonTableForIf(values).appendTo("#if-statement")
+
 	$('#tabs').tabs();
 </script>
 </body>
