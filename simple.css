@@ -18,10 +18,10 @@ table.comparisons td.cell div {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
-  	background-color: #ed9e98;
-  	border-color: #be120d;
+  	background-color: white;
+  	border-color: #b1b1b1;
 }
-table.comparisons td.cell.green div {
+table.comparisons td.cell.equal div {
   background-color: #5bbe5b;
   border-color: #0b6c0b;
 }

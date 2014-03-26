@@ -111,7 +111,7 @@ supportsCanvas = do ->
       [evalStr, tf] = valX.testResults(valY, comparator)
       td.attr("title", "#{evalStr} // #{tf}")
       if tf
-        td.addClass("green")
+        td.addClass("equal")
   $table
 
 @buildComparisonTableForIf = (values)->
@@ -122,7 +122,7 @@ supportsCanvas = do ->
     $td = $("<td>", class: "cell").html($("<div>", html: "&nbsp;")).appendTo($tr)
     val = (new Function("if(#{comp.asString}){return true}else{return false}"))()
     if val
-      $td.addClass("green")
+      $td.addClass("equal")
     expression = " if (#{comp.asString}) { /* #{if val then 'executes' else 'does not execute'} */ } "
     $("<td>", class: "expression").html(expression).appendTo($tr)
   $table
