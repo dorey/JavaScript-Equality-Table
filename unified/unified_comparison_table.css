@@ -10,11 +10,11 @@ body {
   float: left;
 }
 #table {
-  width: 720px;
+  width: 780px;
 }
 #key {
   margin-top: 120px;
-  width: 280px;
+  width: 180px;
 }
 
 table.comparisons {
@@ -32,6 +32,7 @@ table.comparisons td.row.header {
   font-family: Monospace;
   font-size: 15px;
   font-weight: 600;
+  white-space: nowrap;
 }
 table.comparisons td.row.header span {
   color: #eee;
