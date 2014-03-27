@@ -1,0 +1,97 @@
+body {
+  margin: 0;
+}
+#content {
+  width: 1000px;
+  margin: 0 auto;
+}
+#table, #key {
+  float: left;
+}
+#table {
+  width: 720px;
+}
+#key {
+  margin-top: 120px;
+  width: 280px;
+}
+
+table.comparisons {
+  border-spacing: 0;
+  color: #444;  
+}
+table.comparisons p.desc {
+  margin: 0;
+  font-style: italic;
+  color: #666;
+  font-size: 14px;
+}
+table.comparisons td.row.header {
+  text-align: right;
+  font-family: Monospace;
+  font-size: 15px;
+  font-weight: 600;
+}
+table.comparisons td.row.header span {
+  color: #eee;
+  margin-right: -4px;
+}
+/*table.comparisons td.row.header.true {
+  background-color: #f8f8f8;
+}*/
+table.comparisons td.row.header.true span {
+  color: #aaa;
+}
+table.comparisons.key td {
+  padding: 6px 0;
+}
+table.comparisons.key td.label {
+  padding-left: 6px;
+}
+table.comparisons td.cell {
+  padding: 1.5px;
+  cursor: pointer;
+}
+table.comparisons td.cell div {
+  width: 25px;
+  height: 25px;
+  background-color: #ece3e2;
+  border: 2px solid #cecece;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  text-align: center;
+  line-height: 27px;
+  color: #c9c9c9;
+}
+table.comparisons td.strict-equality div, table.comparisons td.loose-equality div {
+  border-color: #817D7D;
+  background-color: #dbdbdb;
+  color: #817D7D;
+}
+table.comparisons td.strict-equality div {
+  color: #5f5f5f;
+  border-color: #464646;
+  background-color: #818181;
+  font-size: 28px;
+  font-weight: bold;
+}
+table.comparisons td.header.col {
+	height: 90px;
+}
+table.comparisons td.header.col span.rotate {
+  position: absolute;
+  font-family: Monospace;
+  font-size: 15px;
+  font-weight: 600;
+  -moz-transform:rotate(90deg);
+  -webkit-transform:rotate(90deg);
+  -o-transform:rotate(90deg);
+  -ms-transform:rotate(90deg);
+  transform:rotate(90deg);
+}
+table.comparisons .expression {
+  font-size: 13px;
+  color: #666;
+  padding-left: 8px;
+}
