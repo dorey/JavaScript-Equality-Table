@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>JS Comparison Table</title>
+	<link rel="stylesheet" href="unified_comparison_table.css" type="text/css" media="all" title="simple" charset="utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="unified_comparison_table.js"></script>
+	
+<!--    Inspired by this post:
+	    http://blog.codekills.net/archives/89-Equality-in-JavaScript.html
+
+	    2013-Nov-11. Correcting issue where "[]===[]" was incorrectly marked as true.
+-->
+</head>
+<body>
+	<div id="content">
+		<h3>Equality in JavaScript</h3>
+		<div id="table"></div>
+		<div id="key"></div>
+		<br style="clear:both">
+	</div>
+	<script type="text/javascript" charset="utf-8">
+		/*
+		Strings in backticks (`) are evaluated.
+		*/
+		var values = [true, false, 1, 0, -1, "`'true'`", "`'false'`", "`'1'`", "`'0'`", "`'-1'`",
+			"", "`null`", "`undefined`", "`[]`", "`{}`", [[]], [0], [1], "`parseFloat('nan')`"];
+
+		buildUnifiedComparisonTable(values).appendTo("#table")
+		buildKeyTable().appendTo("#key")
+	</script>
+</body>
+</html>
