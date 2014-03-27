@@ -60,18 +60,18 @@
 			<p>Use three equals unless you fully understand the conversions that take place for two-equals.</p>
 		</div>
 	</div>
-<script type="text/javascript" charset="utf-8">
-	/*
-	Strings in backticks (`) are evaluated.
-	*/
-	var values = [true, false, 1, 0, -1, "`'true'`", "`'false'`", "`'1'`", "`'0'`", "`'-1'`",
-		"", "`null`", "`undefined`", "`[]`", "`{}`", [[]], [0], [1], "`parseFloat('nan')`"];
+
+    <!-- see values.js for a list of values which are compared in the table -->
+    <script src="values.js" type="text/javascript" charset="utf-8"></script>
+
+    <script type="text/javascript" charset="utf-8">
 
 	buildComparisonTable(values, "==").appendTo("#two-equals")
 	buildComparisonTable(values, "===").appendTo("#three-equals")
 	buildComparisonTableForIf(values).appendTo("#if-statement")
 
 	$('#tabs').tabs();
-</script>
+
+    </script>
 </body>
 </html>
