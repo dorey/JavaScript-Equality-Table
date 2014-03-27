@@ -55,12 +55,8 @@
       if (comparator == null) {
         comparator = "===";
       }
-      if (this.asString === "{}") {
-        evalStr = "[" + this.asString + comparator + fc2.asString + "][0]";
-      } else {
-        evalStr = "" + this.asString + comparator + fc2.asString;
-      }
-      return [evalStr, eval(evalStr)];
+      evalStr = "" + this.asString + comparator + fc2.asString;
+      return [evalStr, eval('(' + evalStr + ')')];
     };
 
     ForComparison.prototype.toString = function() {
