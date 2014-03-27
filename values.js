@@ -13,12 +13,12 @@ var values = [
     "",
     "`null`",
     "`undefined`",
+    Infinity,
+    -Infinity,
     "`[]`",
     "`{}`",
     [[]],
     [0],
     [1],
-    Infinity,
-    -Infinity,
     "`parseFloat('nan')`"
 ];
