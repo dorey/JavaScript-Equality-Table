@@ -18,5 +18,7 @@ var values = [
     [[]],
     [0],
     [1],
+    Infinity,
+    -Infinity,
     "`parseFloat('nan')`"
 ];
