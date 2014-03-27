@@ -35,12 +35,12 @@ var EqualityTable = (function(cmpStr){
           _curRow.append($("<td />", {'class':'row header'}).html("If (<i>value</i>)"))
           var elem;
           $.each(comparisons, function(i){
-              elem = $("<td />", {'class':'cell green'}).html("<div />")
+              elem = $("<td />", {'class':'cell equal'}).html("<div />")
               if(comparisons[i]) {
-                  elem.addClass('green');
+                  elem.addClass('equal');
                   elem.attr('title', "if("+comparisons[i]+"){/*--executes--*/}")
               } else {
-                  elem.addClass('red');
+                  elem.addClass('inequal');
                   elem.attr('title', "if("+comparisons[i]+"){/*--does not execute--*/}")
               }
               _curRow.append(elem)
@@ -56,18 +56,18 @@ var EqualityTable = (function(cmpStr){
     		    elem = $("<td />", {'class': 'cell'}).html("<div />");
     			if(cmpStr==="===") {
     			    if(comparisons[i]===comparisons[j]) {
-    			        elem.addClass('green');
+    			        elem.addClass('equal');
                         elem.attr('title', ""+representations[i]+"==="+representations[j]+"  » true ")
     			    } else {
-    			        elem.addClass('red');
+    			        elem.addClass('inequal');
                         elem.attr('title', ""+representations[i]+"==="+representations[j]+"  » false ")
     			    }
     			} else if(cmpStr==="=="){
     			    if(comparisons[i]==comparisons[j]) {
-    			        elem.addClass('green');
+    			        elem.addClass('equal');
                         elem.attr('title', ""+representations[i]+"=="+representations[j]+"  » true ")
     			    } else {
-    			        elem.addClass('red');
+    			        elem.addClass('inequal');
                         elem.attr('title', ""+representations[i]+"=="+representations[j]+"  » false ")
     			    }
     			}
