@@ -38,11 +38,8 @@ class ForComparison
     else if @item instanceof Array
       @asString = JSON.stringify(@item)
   testResults: (fc2, comparator="===")->
-    if @asString is "{}"
-      evalStr = "[#{@asString}#{comparator}#{fc2.asString}][0]"
-    else
-      evalStr = "#{@asString}#{comparator}#{fc2.asString}"
-    [evalStr, eval(evalStr)]
+    evalStr = "" + @asString + comparator + fc2.asString
+    [evalStr, eval('(' + evalStr + ')')]
   toString: ->
     @asString
 
