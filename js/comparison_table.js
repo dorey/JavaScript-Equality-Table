@@ -169,6 +169,7 @@
         }
       }
     }
+    highlightOnHover($table);
     return $table;
   };
 
@@ -225,4 +226,18 @@
     return canv;
   };
 
+  highlightOnHover = function($table){
+    $table
+        .delegate('td.cell', 'mouseenter', function(){
+            var $headerColumnCell = $(this).closest('table').find('tr:first td:eq('+$(this).index()+')');
+            var $headerRowCell = $(this).siblings(':first');
+            $headerColumnCell.add($headerRowCell).addClass('highlight-cell');
+        })
+        .delegate('td.cell','mouseleave',function(){
+            $(this).closest('table')
+                    .find('td.highlight-cell')
+                    .removeClass('highlight-cell'); 
+        });
+  };
+  
 }).call(this);
