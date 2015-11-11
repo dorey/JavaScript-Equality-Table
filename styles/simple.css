@@ -12,6 +12,9 @@ table.comparisons td.row.header {
 table.comparisons td.cell {
     padding: 1.5px;
 }
+table.comparisons td.highlight-cell {
+  background-color:#DDDDDD;
+}
 table.comparisons td.cell div {
     width: 25px;
     height: 25px;

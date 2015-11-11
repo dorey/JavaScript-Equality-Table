@@ -54,6 +54,9 @@ table.comparisons td.cell {
   padding: 1.5px;
   cursor: pointer;
 }
+table.comparisons td.highlight-cell {
+  background-color:#E3E3E3;
+}
 table.comparisons td.cell div {
   width: 25px;
   height: 25px;
